@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b47a3168d2ce4fba8c4ec4082a2b3662" Name="Diagram1">
+        <EntityTypeShape EntityType="TurkishModel.Availability" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.booking" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.BookingAndTour" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.check" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.City" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Client" Width="1.5" PointX="3" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Country" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Dogovor" Width="1.5" PointX="5.25" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Hotel" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Pass" Width="1.5" PointX="0.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Price" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.TourAgency" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.TourForSales" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.TypeTour" Width="1.5" PointX="0.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.VidClient" Width="1.5" PointX="0.75" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.VidTour" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Worker" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.Zag" Width="1.5" PointX="0.75" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TurkishModel.TourInfo" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="TurkishModel.FK__TourForSa__Avail__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__booking__ClientI__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__booking__WorkerI__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__BookingAn__Booki__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__BookingAn__TourI__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__check__ClientId__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__check__TourId__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__check__WorkerId__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__TourForSa__CityI__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__Client__IdVidCli__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__Client__Passport__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__Client__ZagranId__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__Dogovor__ClientI__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__TourForSa__Count__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__Dogovor__TourAge__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__TourForSa__Hotel__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__Price__TourId__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__TourForSa__TypeT__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="TurkishModel.FK__TourForSa__VidTo__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

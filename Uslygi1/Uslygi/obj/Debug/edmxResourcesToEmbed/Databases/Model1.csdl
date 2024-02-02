@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TurkishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Availability">
+    <Key>
+      <PropertyRef Name="AvailabilityId" />
+    </Key>
+    <Property Name="AvailabilityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AvailabilityName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__TourForSa__Avail__412EB0B6" FromRole="Availability" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="booking">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="WorkerId" Type="Int32" />
+    <Property Name="DataOfBooking" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__booking__ClientI__5441852A" FromRole="booking" ToRole="Client" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__booking__WorkerI__5535A963" FromRole="booking" ToRole="Worker" />
+    <NavigationProperty Name="BookingAndTour" Relationship="Self.FK__BookingAn__Booki__6FE99F9F" FromRole="booking" ToRole="BookingAndTour" />
+  </EntityType>
+  <EntityType Name="BookingAndTour">
+    <Key>
+      <PropertyRef Name="BookTour" />
+    </Key>
+    <Property Name="BookTour" Type="Int32" Nullable="false" />
+    <Property Name="BookingId" Type="Int32" />
+    <Property Name="TourId" Type="Int32" />
+    <NavigationProperty Name="booking" Relationship="Self.FK__BookingAn__Booki__6FE99F9F" FromRole="BookingAndTour" ToRole="booking" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__BookingAn__TourI__70DDC3D8" FromRole="BookingAndTour" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="check">
+    <Key>
+      <PropertyRef Name="CheckId" />
+    </Key>
+    <Property Name="CheckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CheckDate" Type="DateTime" Precision="0" />
+    <Property Name="ClientId" Type="Int32" />
+    <Property Name="WorkerId" Type="Int32" />
+    <Property Name="TourId" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__check__ClientId__47DBAE45" FromRole="check" ToRole="Client" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__check__TourId__49C3F6B7" FromRole="check" ToRole="TourForSales" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__check__WorkerId__48CFD27E" FromRole="check" ToRole="Worker" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CityDescription" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__TourForSa__CityI__3D5E1FD2" FromRole="City" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientSecondName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ClientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ClientMiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdVidClient" Type="Int32" />
+    <Property Name="PassportId" Type="Int32" />
+    <Property Name="ZagranId" Type="Int32" />
+    <Property Name="ClientEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="booking" Relationship="Self.FK__booking__ClientI__5441852A" FromRole="Client" ToRole="booking" />
+    <NavigationProperty Name="check" Relationship="Self.FK__check__ClientId__47DBAE45" FromRole="Client" ToRole="check" />
+    <NavigationProperty Name="VidClient" Relationship="Self.FK__Client__IdVidCli__2A4B4B5E" FromRole="Client" ToRole="VidClient" />
+    <NavigationProperty Name="Pass" Relationship="Self.FK__Client__Passport__2B3F6F97" FromRole="Client" ToRole="Pass" />
+    <NavigationProperty Name="Zag" Relationship="Self.FK__Client__ZagranId__2C3393D0" FromRole="Client" ToRole="Zag" />
+    <NavigationProperty Name="Dogovor" Relationship="Self.FK__Dogovor__ClientI__59063A47" FromRole="Client" ToRole="Dogovor" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__TourForSa__Count__3C69FB99" FromRole="Country" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="Dogovor">
+    <Key>
+      <PropertyRef Name="DogovorId" />
+    </Key>
+    <Property Name="DogovorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TourAgencyId" Type="Int32" />
+    <Property Name="ClientId" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Dogovor__ClientI__59063A47" FromRole="Dogovor" ToRole="Client" />
+    <NavigationProperty Name="TourAgency" Relationship="Self.FK__Dogovor__TourAge__5812160E" FromRole="Dogovor" ToRole="TourAgency" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="HotelId" />
+    </Key>
+    <Property Name="HotelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="HotelDescription" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__TourForSa__Hotel__3E52440B" FromRole="Hotel" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="Pass">
+    <Key>
+      <PropertyRef Name="PassportId" />
+    </Key>
+    <Property Name="PassportId" Type="Int32" Nullable="false" />
+    <Property Name="PassportLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__Passport__2B3F6F97" FromRole="Pass" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="PriceId" />
+    </Key>
+    <Property Name="PriceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountPrice" Type="Int32" />
+    <Property Name="PriceDate" Type="DateTime" Precision="0" />
+    <Property Name="TourId" Type="Int32" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__Price__TourId__5165187F" FromRole="Price" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TourAgency">
+    <Key>
+      <PropertyRef Name="TourAgencyId" />
+    </Key>
+    <Property Name="TourAgencyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TourAgencyName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Dogovor" Relationship="Self.FK__Dogovor__TourAge__5812160E" FromRole="TourAgency" ToRole="Dogovor" />
+  </EntityType>
+  <EntityType Name="TourForSales">
+    <Key>
+      <PropertyRef Name="TourId" />
+    </Key>
+    <Property Name="TourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TourName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TourDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AmountOfPeople" Type="Int32" />
+    <Property Name="StartTourDate" Type="DateTime" Precision="0" />
+    <Property Name="EndTourDate" Type="DateTime" Precision="0" />
+    <Property Name="AmountOfNights" Type="Int32" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="HotelId" Type="Int32" />
+    <Property Name="TypeTourId" Type="Int32" />
+    <Property Name="VidTourId" Type="Int32" />
+    <Property Name="AvailabilityId" Type="Int32" />
+    <NavigationProperty Name="Availability" Relationship="Self.FK__TourForSa__Avail__412EB0B6" FromRole="TourForSales" ToRole="Availability" />
+    <NavigationProperty Name="BookingAndTour" Relationship="Self.FK__BookingAn__TourI__70DDC3D8" FromRole="TourForSales" ToRole="BookingAndTour" />
+    <NavigationProperty Name="check" Relationship="Self.FK__check__TourId__49C3F6B7" FromRole="TourForSales" ToRole="check" />
+    <NavigationProperty Name="City" Relationship="Self.FK__TourForSa__CityI__3D5E1FD2" FromRole="TourForSales" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK__TourForSa__Count__3C69FB99" FromRole="TourForSales" ToRole="Country" />
+    <NavigationProperty Name="Hotel" Relationship="Self.FK__TourForSa__Hotel__3E52440B" FromRole="TourForSales" ToRole="Hotel" />
+    <NavigationProperty Name="Price" Relationship="Self.FK__Price__TourId__5165187F" FromRole="TourForSales" ToRole="Price" />
+    <NavigationProperty Name="TypeTour" Relationship="Self.FK__TourForSa__TypeT__3F466844" FromRole="TourForSales" ToRole="TypeTour" />
+    <NavigationProperty Name="VidTour" Relationship="Self.FK__TourForSa__VidTo__403A8C7D" FromRole="TourForSales" ToRole="VidTour" />
+    <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TypeTour">
+    <Key>
+      <PropertyRef Name="TypeTourId" />
+    </Key>
+    <Property Name="TypeTourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeTourName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__TourForSa__TypeT__3F466844" FromRole="TypeTour" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="VidClient">
+    <Key>
+      <PropertyRef Name="IdVidClient" />
+    </Key>
+    <Property Name="IdVidClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameVidClient" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__IdVidCli__2A4B4B5E" FromRole="VidClient" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="VidTour">
+    <Key>
+      <PropertyRef Name="VidTourId" />
+    </Key>
+    <Property Name="VidTourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VidTourName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourForSales" Relationship="Self.FK__TourForSa__VidTo__403A8C7D" FromRole="VidTour" ToRole="TourForSales" />
+  </EntityType>
+  <EntityType Name="Worker">
+    <Key>
+      <PropertyRef Name="WorkerId" />
+    </Key>
+    <Property Name="WorkerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkerSecondName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="WorkerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="WorkerMiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="booking" Relationship="Self.FK__booking__WorkerI__5535A963" FromRole="Worker" ToRole="booking" />
+    <NavigationProperty Name="check" Relationship="Self.FK__check__WorkerId__48CFD27E" FromRole="Worker" ToRole="check" />
+  </EntityType>
+  <EntityType Name="Zag">
+    <Key>
+      <PropertyRef Name="ZagranId" />
+    </Key>
+    <Property Name="ZagranId" Type="Int32" Nullable="false" />
+    <Property Name="ZagLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Birthdayy" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__ZagranId__2C3393D0" FromRole="Zag" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="TourInfo">
+    <Key>
+      <PropertyRef Name="TourId" />
+    </Key>
+    <Property Name="TourId" Type="Int32" Nullable="false" />
+    <Property Name="TourName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AmountOfNights" Type="Int32" />
+    <Property Name="AmountOfPeople" Type="Int32" />
+    <Property Name="StartTourDate" Type="DateTime" Precision="0" />
+    <Property Name="EndTourDate" Type="DateTime" Precision="0" />
+    <Property Name="TourDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountryName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CityName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="HotelName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="TypeTourName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="VidTourName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="AvailabilityName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CountPrice" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__TourForSa__Avail__412EB0B6">
+    <End Role="Availability" Type="Self.Availability" Multiplicity="0..1" />
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Availability">
+        <PropertyRef Name="AvailabilityId" />
+      </Principal>
+      <Dependent Role="TourForSales">
+        <PropertyRef Name="AvailabilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__booking__ClientI__5441852A">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="booking" Type="Self.booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="booking">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__booking__WorkerI__5535A963">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="0..1" />
+    <End Role="booking" Type="Self.booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="WorkerId" />
+      </Principal>
+      <Dependent Role="booking">
+        <PropertyRef Name="WorkerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookingAn__Booki__6FE99F9F">
+    <End Role="booking" Type="Self.booking" Multiplicity="0..1" />
+    <End Role="BookingAndTour" Type="Self.BookingAndTour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="booking">
+        <PropertyRef Name="BookingId" />
+      </Principal>
+      <Dependent Role="BookingAndTour">
+        <PropertyRef Name="BookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookingAn__TourI__70DDC3D8">
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="0..1" />
+    <End Role="BookingAndTour" Type="Self.BookingAndTour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourForSales">
+        <PropertyRef Name="TourId" />
+      </Principal>
+      <Dependent Role="BookingAndTour">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__check__ClientId__47DBAE45">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="check" Type="Self.check" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="check">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__check__TourId__49C3F6B7">
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="0..1" />
+    <End Role="check" Type="Self.check" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourForSales">
+        <PropertyRef Name="TourId" />
+      </Principal>
+      <Dependent Role="check">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__check__WorkerId__48CFD27E">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="0..1" />
+    <End Role="check" Type="Self.check" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="WorkerId" />
+      </Principal>
+      <Dependent Role="check">
+        <PropertyRef Name="WorkerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TourForSa__CityI__3D5E1FD2">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="TourForSales">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__IdVidCli__2A4B4B5E">
+    <End Role="VidClient" Type="Self.VidClient" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VidClient">
+        <PropertyRef Name="IdVidClient" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="IdVidClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__Passport__2B3F6F97">
+    <End Role="Pass" Type="Self.Pass" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pass">
+        <PropertyRef Name="PassportId" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="PassportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__ZagranId__2C3393D0">
+    <End Role="Zag" Type="Self.Zag" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zag">
+        <PropertyRef Name="ZagranId" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="ZagranId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Dogovor__ClientI__59063A47">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Dogovor" Type="Self.Dogovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="Dogovor">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TourForSa__Count__3C69FB99">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="TourForSales">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Dogovor__TourAge__5812160E">
+    <End Role="TourAgency" Type="Self.TourAgency" Multiplicity="0..1" />
+    <End Role="Dogovor" Type="Self.Dogovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourAgency">
+        <PropertyRef Name="TourAgencyId" />
+      </Principal>
+      <Dependent Role="Dogovor">
+        <PropertyRef Name="TourAgencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TourForSa__Hotel__3E52440B">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="HotelId" />
+      </Principal>
+      <Dependent Role="TourForSales">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Price__TourId__5165187F">
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="0..1" />
+    <End Role="Price" Type="Self.Price" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourForSales">
+        <PropertyRef Name="TourId" />
+      </Principal>
+      <Dependent Role="Price">
+        <PropertyRef Name="TourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TourForSa__TypeT__3F466844">
+    <End Role="TypeTour" Type="Self.TypeTour" Multiplicity="0..1" />
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeTour">
+        <PropertyRef Name="TypeTourId" />
+      </Principal>
+      <Dependent Role="TourForSales">
+        <PropertyRef Name="TypeTourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TourForSa__VidTo__403A8C7D">
+    <End Role="VidTour" Type="Self.VidTour" Multiplicity="0..1" />
+    <End Role="TourForSales" Type="Self.TourForSales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VidTour">
+        <PropertyRef Name="VidTourId" />
+      </Principal>
+      <Dependent Role="TourForSales">
+        <PropertyRef Name="VidTourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TurkishEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Availability" EntityType="Self.Availability" />
+    <EntitySet Name="booking" EntityType="Self.booking" />
+    <EntitySet Name="BookingAndTour" EntityType="Self.BookingAndTour" />
+    <EntitySet Name="check" EntityType="Self.check" />
+    <EntitySet Name="City" EntityType="Self.City" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Country" EntityType="Self.Country" />
+    <EntitySet Name="Dogovor" EntityType="Self.Dogovor" />
+    <EntitySet Name="Hotel" EntityType="Self.Hotel" />
+    <EntitySet Name="Pass" EntityType="Self.Pass" />
+    <EntitySet Name="Price" EntityType="Self.Price" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TourAgency" EntityType="Self.TourAgency" />
+    <EntitySet Name="TourForSales" EntityType="Self.TourForSales" />
+    <EntitySet Name="TypeTour" EntityType="Self.TypeTour" />
+    <EntitySet Name="VidClient" EntityType="Self.VidClient" />
+    <EntitySet Name="VidTour" EntityType="Self.VidTour" />
+    <EntitySet Name="Worker" EntityType="Self.Worker" />
+    <EntitySet Name="Zag" EntityType="Self.Zag" />
+    <EntitySet Name="TourInfo" EntityType="Self.TourInfo" />
+    <AssociationSet Name="FK__TourForSa__Avail__412EB0B6" Association="Self.FK__TourForSa__Avail__412EB0B6">
+      <End Role="Availability" EntitySet="Availability" />
+      <End Role="TourForSales" EntitySet="TourForSales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__booking__ClientI__5441852A" Association="Self.FK__booking__ClientI__5441852A">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="booking" EntitySet="booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__booking__WorkerI__5535A963" Association="Self.FK__booking__WorkerI__5535A963">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="booking" EntitySet="booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookingAn__Booki__6FE99F9F" Association="Self.FK__BookingAn__Booki__6FE99F9F">
+      <End Role="booking" EntitySet="booking" />
+      <End Role="BookingAndTour" EntitySet="BookingAndTour" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookingAn__TourI__70DDC3D8" Association="Self.FK__BookingAn__TourI__70DDC3D8">
+      <End Role="TourForSales" EntitySet="TourForSales" />
+      <End Role="BookingAndTour" EntitySet="BookingAndTour" />
+    </AssociationSet>
+    <AssociationSet Name="FK__check__ClientId__47DBAE45" Association="Self.FK__check__ClientId__47DBAE45">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="check" EntitySet="check" />
+    </AssociationSet>
+    <AssociationSet Name="FK__check__TourId__49C3F6B7" Association="Self.FK__check__TourId__49C3F6B7">
+      <End Role="TourForSales" EntitySet="TourForSales" />
+      <End Role="check" EntitySet="check" />
+    </AssociationSet>
+    <AssociationSet Name="FK__check__WorkerId__48CFD27E" Association="Self.FK__check__WorkerId__48CFD27E">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="check" EntitySet="check" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TourForSa__CityI__3D5E1FD2" Association="Self.FK__TourForSa__CityI__3D5E1FD2">
+      <End Role="City" EntitySet="City" />
+      <End Role="TourForSales" EntitySet="TourForSales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__IdVidCli__2A4B4B5E" Association="Self.FK__Client__IdVidCli__2A4B4B5E">
+      <End Role="VidClient" EntitySet="VidClient" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__Passport__2B3F6F97" Association="Self.FK__Client__Passport__2B3F6F97">
+      <End Role="Pass" EntitySet="Pass" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__ZagranId__2C3393D0" Association="Self.FK__Client__ZagranId__2C3393D0">
+      <End Role="Zag" EntitySet="Zag" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Dogovor__ClientI__59063A47" Association="Self.FK__Dogovor__ClientI__59063A47">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Dogovor" EntitySet="Dogovor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TourForSa__Count__3C69FB99" Association="Self.FK__TourForSa__Count__3C69FB99">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="TourForSales" EntitySet="TourForSales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Dogovor__TourAge__5812160E" Association="Self.FK__Dogovor__TourAge__5812160E">
+      <End Role="TourAgency" EntitySet="TourAgency" />
+      <End Role="Dogovor" EntitySet="Dogovor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TourForSa__Hotel__3E52440B" Association="Self.FK__TourForSa__Hotel__3E52440B">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="TourForSales" EntitySet="TourForSales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Price__TourId__5165187F" Association="Self.FK__Price__TourId__5165187F">
+      <End Role="TourForSales" EntitySet="TourForSales" />
+      <End Role="Price" EntitySet="Price" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TourForSa__TypeT__3F466844" Association="Self.FK__TourForSa__TypeT__3F466844">
+      <End Role="TypeTour" EntitySet="TypeTour" />
+      <End Role="TourForSales" EntitySet="TourForSales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TourForSa__VidTo__403A8C7D" Association="Self.FK__TourForSa__VidTo__403A8C7D">
+      <End Role="VidTour" EntitySet="VidTour" />
+      <End Role="TourForSales" EntitySet="TourForSales" />
+    </AssociationSet>
+    <FunctionImport Name="AddCheck">
+      <Parameter Name="clientid" Mode="In" Type="Int32" />
+      <Parameter Name="workerid" Mode="In" Type="Int32" />
+      <Parameter Name="tourid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddClient">
+      <Parameter Name="secondname" Mode="In" Type="String" />
+      <Parameter Name="location" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="middlename" Mode="In" Type="String" />
+      <Parameter Name="idvid" Mode="In" Type="Int32" />
+      <Parameter Name="passportid" Mode="In" Type="Int32" />
+      <Parameter Name="zagid" Mode="In" Type="Int32" />
+      <Parameter Name="email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddPass">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="location" Mode="In" Type="String" />
+      <Parameter Name="birth" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="AddZag">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="location" Mode="In" Type="String" />
+      <Parameter Name="birth" Mode="In" Type="DateTime" />
+      <Parameter Name="startdate" Mode="In" Type="DateTime" />
+      <Parameter Name="enddate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TurkishModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TurkishModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="AddTour">
+      <Parameter Name="nametour" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="countpeople" Mode="In" Type="Int32" />
+      <Parameter Name="countnights" Mode="In" Type="Int32" />
+      <Parameter Name="typeclient" Mode="In" Type="String" />
+      <Parameter Name="datestart" Mode="In" Type="DateTime" />
+      <Parameter Name="dateend" Mode="In" Type="DateTime" />
+      <Parameter Name="countryid" Mode="In" Type="Int32" />
+      <Parameter Name="cityid" Mode="In" Type="Int32" />
+      <Parameter Name="hotelid" Mode="In" Type="Int32" />
+      <Parameter Name="typeid" Mode="In" Type="Int32" />
+      <Parameter Name="vidid" Mode="In" Type="Int32" />
+      <Parameter Name="avaliabilityid" Mode="In" Type="Int32" />
+      <Parameter Name="countprice" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddCity">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="desc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddCountry">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteTour">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
